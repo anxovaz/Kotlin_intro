@@ -29,6 +29,34 @@ fun main() {
     println(cantidad3+cantidad4) //2030
 
     println(add(2,3))
+
+
+    //If
+
+    if(cantidad3 > cantidad4){
+        println("$cantidad3 es mayor que $cantidad4")
+    }else if(cantidad3 < cantidad4){
+        println("$cantidad4 es mayor que $cantidad3")
+    }else{
+        println("Son iguales")
+    }
+
+    //while
+    var contador: Int = 0
+    var condicion: Boolean = true
+    while (condicion) {
+        if(contador < 5){
+            contador++
+            println("Vuelta número $contador")
+        }else{
+            condicion = false
+        }
+    }
+
+    //for
+    for(i in 1..5){
+        println(i)
+    }
 }
 
 fun saludo(nombre: String, apellido: String ="Vázquez"): Boolean {

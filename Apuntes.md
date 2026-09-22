@@ -57,5 +57,39 @@ return true
 }
 ```
 
+# `if, else, else if`
+
+```
+if(cantidad3 > cantidad4){
+        println("$cantidad3 es mayor que $cantidad4")
+    }else if(cantidad3 < cantidad4){
+        println("$cantidad4 es mayor que $cantidad3")
+    }else{
+        println("Son iguales")
+    }
+```
+
+# `if, for, while`
+
+```
+//while
+    var contador: Int = 0
+    var condicion: Boolean = true
+    while (condicion) {
+        if(contador < 5){
+            contador++
+            println("Vuelta número $contador")
+        }else{
+            condicion = false
+        }
+    }
+
+    //for
+    for(i in 1..5){
+        println(i)
+    }
+```
+
+
 
 
