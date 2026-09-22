@@ -43,3 +43,19 @@ var cantidad: Int = 5
 var cantidad2: Double = cantidad.toDouble()
 //resultado = 5.0
 ```
+
+# Funciones
+
+- `nombre: String` -> lo que recibe como argumento
+
+- `: Boolean` -> lo que devuelve (omitir si no devolviese nada)
+
+```
+fun saludo(nombre: String): Boolean {
+println("Hola $nombre")
+return true
+}
+```
+
+
+
