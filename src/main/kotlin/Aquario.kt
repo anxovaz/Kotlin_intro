@@ -1,8 +1,11 @@
 class Aquario {
     var ancho: Int = 0
     var largo: Int = 0
+    val alto: Int = 5
     var litrosLlenados: Int = 0
     val encargadoMantenimiento: String = "Pepe"
+    val volumen: Int
+        get() = largo * ancho * alto
 
     constructor(ancho: Int = 100, largo: Int = 40, litrosLlenados: Int = 3000) {
         this.ancho = ancho
