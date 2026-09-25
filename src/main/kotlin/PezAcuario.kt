@@ -1,3 +1,3 @@
 abstract class PezAcuario {
-    abstract var color: String
+    abstract val color: String;
 }
