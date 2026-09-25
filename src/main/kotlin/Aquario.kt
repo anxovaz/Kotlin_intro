@@ -42,5 +42,6 @@ fun main() {
 fun crearPez() {
     val manta = Manta()
     println(manta.color)
+    manta.comer()
 
 }

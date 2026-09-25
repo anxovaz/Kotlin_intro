@@ -1,0 +1,3 @@
+interface AccionesPez {
+    fun comer()
+}
