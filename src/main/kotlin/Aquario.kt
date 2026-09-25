@@ -4,8 +4,14 @@ class Aquario {
     val alto: Int = 5
     var litrosLlenados: Int = 0
     val encargadoMantenimiento: String = "Pepe"
-    val volumen: Int
+    var volumen: Int
         get() = largo * ancho * alto
+        set(valor) {
+            largo = valor
+        }
+    init{
+        println("Inicializando Aquario")
+    }
 
     constructor(ancho: Int = 100, largo: Int = 40, litrosLlenados: Int = 3000) {
         this.ancho = ancho
