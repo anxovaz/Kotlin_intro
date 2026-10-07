@@ -5,12 +5,116 @@ selecciona un café y la máquina avanza por los estados de preparación y entre
 
 ```mermaid
 flowchart TD
-    Idle["estado = Idle"] --> CoinsCheck
-    CoinsCheck@{ shape: inv-tri, label: "coins.wage() >= 0.60" }
+    Idle["estado = Idle"] --> CargingMachine["estado = CargingMachine"]
+    CargingMachine --> CoinsCheck
+    CoinsCheck{"coins.wage() >= 0.60"}
     CoinsCheck -->|Sí| MakeCofee["estado = MakeCofee"]
-    CoinsCheck -->|No| Idle
+    CoinsCheck -->|No| CargingMachine
     MakeCofee -->|Cofee preparado| ServeCofee["estado = ServeCofee"]
     MakeCofee -->|Error durante la preparación| Error["estado = error"]
-    ServeCofee -->|Cofee servido / Coins.returncoins(change)| Idle
-    Error -->|Reiniciar o cancelar| Idle
+    ServeCofee -->|Cofee servido| ReturnChange["estado = ReturnChange"]
+    Error -->|Salir del error| ReturnChange
+    ReturnChange -->|"Coins.returncoins(change)"| Idle
+```
+
+## Diagrama UML de clases
+
+### Máquina y estados
+
+```mermaid
+classDiagram
+    direction LR
+
+    class CofeeMachine {
+        -state: CofeeMachineState
+        -coins: Coins
+        +insertCoins(amount: Double) void
+        +selectCofee(cofee: Cofee) void
+        +makeCofee() void
+        +serveCofee() void
+        +returnChange() void
+        +setState(state: CofeeMachineState) void
+    }
+
+    class CofeeMachineState {
+        <<interface>>
+        +insertCoins(machine: CofeeMachine, amount: Double) void
+        +selectCofee(machine: CofeeMachine, cofee: Cofee) void
+        +makeCofee(machine: CofeeMachine) void
+        +serveCofee(machine: CofeeMachine) void
+        +returnChange(machine: CofeeMachine) void
+    }
+
+    class Idle {
+        +insertCoins(machine: CofeeMachine, amount: Double) void
+    }
+    class CargingMachine {
+        +insertCoins(machine: CofeeMachine, amount: Double) void
+    }
+    class MakeCofee {
+        +makeCofee(machine: CofeeMachine) void
+    }
+    class ServeCofee {
+        +serveCofee(machine: CofeeMachine) void
+    }
+    class ReturnChange {
+        +returnChange(machine: CofeeMachine) void
+    }
+    class Error {
+        +returnChange(machine: CofeeMachine) void
+    }
+
+    class Coins {
+        -balance: Double
+        +insert(amount: Double) void
+        +wage() Double
+        +returncoins(change: Double) void
+    }
+
+    class Cofee {
+        <<abstract>>
+    }
+
+    CofeeMachine --> CofeeMachineState : current state
+    CofeeMachine *-- Coins : owns
+    CofeeMachine o-- Cofee : selected cofee
+    CofeeMachineState <|.. Idle
+    CofeeMachineState <|.. CargingMachine
+    CofeeMachineState <|.. MakeCofee
+    CofeeMachineState <|.. ServeCofee
+    CofeeMachineState <|.. ReturnChange
+    CofeeMachineState <|.. Error
+```
+
+### Tipos de café
+
+```mermaid
+classDiagram
+    direction LR
+
+    class CofeeMachine {
+        -selectedCofee: Cofee
+        +selectCofee(cofee: Cofee) void
+    }
+
+    class Cofee {
+        <<abstract>>
+        -price: Double
+        +getPrice() Double
+        +prepare() void*
+    }
+    class Capuchino {
+        +prepare() void
+    }
+    class Expresso {
+        +prepare() void
+    }
+    class Solo {
+        +prepare() void
+    }
+
+    CofeeMachine o-- Cofee : selected cofee
+    Cofee <|-- Capuchino
+    Cofee <|-- Expresso
+    Cofee <|-- Solo
 ```
