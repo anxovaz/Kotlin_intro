@@ -48,7 +48,7 @@ classDiagram
     class Idle {
         +insertCoins(machine: CofeeMachine, amount: Double) void
     }
-    class CargingMachine {
+    class ChargingMachine {
         +insertCoins(machine: CofeeMachine, amount: Double) void
     }
     class MakeCofee {
