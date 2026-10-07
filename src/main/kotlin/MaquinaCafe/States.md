@@ -104,12 +104,15 @@ classDiagram
         +prepare() void*
     }
     class Capuchino {
+        -ingredients: String[]
         +prepare() void
     }
     class Expresso {
+        -ingredients: String[]
         +prepare() void
     }
     class Solo {
+        -ingredients: String[]
         +prepare() void
     }
 
